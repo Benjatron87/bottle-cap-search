@@ -1,0 +1,19 @@
+.navbar{
+    box-shadow: 3px 3px 3px maroon;
+    background: grey;
+}
+
+.home{
+    color: white;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.home:hover, .images:hover{
+    text-decoration: none;
+    color: rgb(95, 30, 30);
+}
+
+.images{
+    color: white;
+}
