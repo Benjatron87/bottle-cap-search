@@ -1,0 +1,25 @@
+{
+  "name": "bottle-cap-search",
+  "version": "1.0.0",
+  "description": "My roommate and I are collecting bottle caps to build a sweet table. We want all unique caps, meaning we need a way to check the caps we already have so we dont accidentally buy duplicates. (Also an excuse to drink new beer)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Benjatron87/bottle-cap-search.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Benjatron87/bottle-cap-search/issues"
+  },
+  "homepage": "https://github.com/Benjatron87/bottle-cap-search#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.6.2",
+    "path": "^0.12.7"
+  }
+}
