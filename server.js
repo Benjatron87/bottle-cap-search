@@ -1,14 +1,8 @@
 const express = require('express');
 const app = express();
 const path = require("path");
-const mongoose = require('mongoose');
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/Img";
 
 app.use(express.static("public"));
-
-mongoose.connect(MONGODB_URI, {useNewUrlParser: true}, () => {
-    console.log('connected to mongodb')
-})
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
