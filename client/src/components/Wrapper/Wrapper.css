@@ -1,0 +1,7 @@
+.wrapper{
+    box-shadow: 3px 3px 3px rgb(110, 0, 0);
+    margin-top: 40px;
+    height: 300px;
+    padding-top: 40px;
+    background: rgba(150, 150, 150, 0.8)
+}

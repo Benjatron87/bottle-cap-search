@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import Wrapper from '../components/Wrapper/Wrapper';
+import ImgWrapper from '../components/ImgWrapper/ImgWrapper';
 
 class Images extends Component {
     render() {
         return (
-            <div>
-                images
-            </div>
+            <Wrapper>
+                <ImgWrapper/>
+            </Wrapper>
         );
     }
 }

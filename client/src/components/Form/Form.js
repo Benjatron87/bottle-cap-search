@@ -4,13 +4,13 @@ import './Form.css';
 class Form extends Component {
     render() {
         return (
-            <div className="input">
+            <div>
                <form>
-                    <input type="file" name="pic" accept="image/*"/>
+                    <input className="input pic-input" type="file" name="pic" accept="image/*"/>
                     <br></br>
-                    <input type="text" name="brand"/>
+                    <input className="input brand-input" placeholder="Enter Brand" type="text" name="brand"/>
                     <br></br>
-                    <input type="submit"/>
+                    <button className="input submit" type="submit">Add</button>
                 </form>
             </div>
         );

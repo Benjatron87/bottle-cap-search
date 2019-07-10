@@ -1,0 +1,17 @@
+.search{
+    width: 70%;
+    margin-left: 15%;
+}
+
+.btn{
+    background: rgba(100, 0, 0, .9);
+    color: white;
+}
+
+.btn:hover{
+    color: rgb(175, 174, 174);
+}
+
+.search-bar{
+    margin-bottom: 5px;
+}
