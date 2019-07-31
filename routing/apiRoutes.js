@@ -1,91 +1,64 @@
-const fs = require("fs"); 
-
 const mongoose = require("mongoose");
-
 mongoose.connect("mongodb://localhost/images");
 
-const upload = require("../multer/storage");
 const Image = require("../models/img");
 
+const multer = require('multer');
+
+// define storage for multer
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '../client/public/images');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+// checks filetype before storing to db
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+// pass storage params for multer
+const upload = multer({
+  storage: storage,
+  limits: 500 * 500 * 5,
+  fileFilter: fileFilter
+});
+
+
 module.exports = function(app){
+    
+    app.get("/api/uploads", (req, res, next)=>{
 
-    app.delete("/uploads/:id", (req,res)=>{
-
-        let query= {image:req.params.id};
-
-        Image.remove(query, (err)=>{
+        Image.find({}, (err, images)=>{
             if(err){
                 console.log(err);
             }else{
-                
-                let $filePath= "./uploads/" + req.params.id
-                fs.unlinkSync($filePath, (err)=>{
-                    if(err){
-                        
-                        console.log("couldnt delete " + req.params.id + " image");
-                    }
-                                    
-                                
+
+                res.JSON({
+                    images: images
                 });
-
-                res.send("The image was deleted...");
-            }
+            } 
         });
-
-    });
     
-    app.get("/uploads", (req, res, next)=>{
-
-    Image.find({}, (err, images)=>{
-        if(err){
-            console.log(err);
-        }else{
-
-            res.render("uploads", {
-                images: images
-            });
-        } 
-    });
-    
-        
     });
 
-    app.post("/uploads", (req, res, next)=>{
-
-        upload(req, res, function (err) {
-            
-            if(req.file == null || req.file == undefined || req.file == ""){
-                
-                res.redirect("/");
-                
-            }else{
-                
-                if (err) {
-                    console.log(err);
-                }else{
-                
-                    console.log(req.file);
+    app.post("/api/uploads", upload.single('dogPic'), (req, res) => {
         
-                    let image = new Image();
-                    image.image = req.file.filename;
-                    image.brand = req.body.image.brand;
-            
-                    image.save(()=>{
-                        if(err){
-                            console.log(err);
-                        }else{
-                            res.redirect("/uploads");
-            
-                        }
-                    });
-
-                }
-        
-            }
-
-        }); 
-
-
+        Image.create({
+            "image": req.body.image,
+            "brand": req.body.brand
+        }).then(result => {
+            res.redirect("/console");
+        }).catch(err => {
+            res.json(err);
+        });
         
     });
-}
+}  

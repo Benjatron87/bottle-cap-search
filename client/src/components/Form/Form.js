@@ -1,16 +1,49 @@
 import React, { Component } from 'react';
 import './Form.css';
+import API from '../../utils/API';
 
 class Form extends Component {
+
+    state = {
+        "image": "",
+        "brand": ""
+    }
+
+    handleChange = event => {
+        let value = event.target.value;
+        const name = event.target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    submitHandling = event => {
+        event.preventDefault();
+
+        const image = {
+            "image": this.state.image,
+            "brand": this.state.brand
+        }
+        console.log(image);
+
+        API.sendImage(image);
+
+        this.setState({
+            "image": "",
+            "brand": ""
+        })
+    }
+
     render() {
         return (
             <div>
                <form>
-                    <input className="input pic-input" type="file" name="pic" accept="image/*"/>
+                    <input onChange={this.handleChange} className="input pic-input" type="file" name="image" value={this.state.image}  accept="image/*"/>
                     <br></br>
-                    <input className="input brand-input" placeholder="Enter Brand" type="text" name="brand"/>
+                    <input onChange={this.handleChange} className="input brand-input" placeholder="Enter Brand" type="text" name="brand" value={this.state.brand} />
                     <br></br>
-                    <button className="input submit" type="submit">Add</button>
+                    <button onClick={this.submitHandling} className="input submit" type="submit">Add</button>
                 </form>
             </div>
         );

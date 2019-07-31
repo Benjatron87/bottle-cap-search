@@ -15,3 +15,10 @@
 .search-bar{
     margin-bottom: 5px;
 }
+
+@media only screen and (max-width: 500px){
+    .search{
+        margin-left: 5%;
+        width: 90%;
+    }
+  }
